@@ -200,21 +200,18 @@ void _rtc_intr_hndlr(){
     outb(0x0B,0x70);
     regb = inb(0x71);
         
-    kprintf("\n%d:%d:%d\n",rtc_hour,rtc_minute,rtc_second);
+  //  kprintf("\n%d:%d:%d\n",rtc_hour,rtc_minute,rtc_second);
         
     if (!(regb & 0x04)) {
         //rtc_second=(rtc_second & 0x0F)+((rtc_second/16)*10);
         rtc_minute=(rtc_minute & 0x0F)+ ((rtc_minute/16)*10);
         rtc_hour=((rtc_hour & 0x0F) +(((rtc_hour & 0x70)/16)*10));
     }
-        kprintf("\n%d\n",(rtc_hour & 0x7F));
     if (!(regb & 0x02) && (rtc_hour & 0x80)) {
-        kprintf("klajsdlasjd");
             rtc_hour = ((rtc_hour & 0x7F) + 12) % 24;
     }
-        kprintf("\n%d\n",rtc_hour);
         
-    kprintf("\n%d:%d:%d\n",rtc_hour,rtc_minute,rtc_second);
+   // kprintf("\n%d:%d:%d\n",rtc_hour,rtc_minute,rtc_second);
     //NYC Time   
     rtc_hour=rtc_hour-4<0?rtc_hour-4+24:rtc_hour-4;
     
