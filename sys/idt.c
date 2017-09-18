@@ -211,6 +211,7 @@ void _rtc_intr_hndlr(){
     if (!(regb & 0x02) && (rtc_hour & 0x80)) {
             rtc_hour = ((rtc_hour & 0x7F) + 12) % 24;
     }
+        kprintf("\n%d\n",rtc_hour);
         
     kprintf("\n%d:%d:%d\n",rtc_hour,rtc_minute,rtc_second);
     //NYC Time   
