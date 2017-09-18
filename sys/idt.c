@@ -207,7 +207,7 @@ void _rtc_intr_hndlr(){
         rtc_minute=(rtc_minute & 0x0F)+ ((rtc_minute/16)*10);
         rtc_hour=((rtc_hour & 0x0F) +(((rtc_hour & 0x70)/16)*10));
     }
-    kprintf("\n%d\n",(rtc_hour & 0x7F))
+        kprintf("\n%d\n",(rtc_hour & 0x7F));
     if (!(regb & 0x02) && (rtc_hour & 0x80)) {
             rtc_hour = ((rtc_hour & 0x7F) + 12) % 24;
     }
