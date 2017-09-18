@@ -209,6 +209,7 @@ void _rtc_intr_hndlr(){
     }
         kprintf("\n%d\n",(rtc_hour & 0x7F));
     if (!(regb & 0x02) && (rtc_hour & 0x80)) {
+        kprintf("klajsdlasjd");
             rtc_hour = ((rtc_hour & 0x7F) + 12) % 24;
     }
         kprintf("\n%d\n",rtc_hour);
