@@ -123,7 +123,7 @@ void _key_press_handler(){
                 else if (control==1)
                 {
                     control=0;
-                    char s[] = {'L','A','S','T',' ','P','R','E','S','S','E','D',':',' ','c','t','r','l','^',kbdus[a],'\0'};
+                    char s[] = {'L','A','S','T',' ','P','R','E','S','S','E','D',':',' ','^',CAPS_kbdus[a],'\0'};
                     keypress_bar(s,0XF0);
                     
                 }
