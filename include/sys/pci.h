@@ -10,7 +10,7 @@ struct pci_read
     uint8_t funcNum:3;
     uint8_t deviceNum:5;
     uint8_t busNum:8;
-    uint8_t rserved:7;
+    uint8_t reserved:7;
     uint8_t enableBit:1;
 }__attribute__((packed));
 
