@@ -4,7 +4,7 @@
 void init_pci(){
     
     kprintf("%d",sizeof(struct pci_read));
-    struct pci_read a={1,0,0,0,0,0,1};
+    struct pci_read a={0,1,0,0,0,0,1};
     struct pci_read *p =&a ;
    // p->enableBit = 1;
     
