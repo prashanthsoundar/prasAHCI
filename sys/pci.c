@@ -1,6 +1,12 @@
 #include<sys/pci.h>
 #include<sys/defs.h>
 
+uint32_t calculateConfigAddressSpace(struct pci_read pciRead)
+{
+    return (uint32_t)(1<<31|(0xFF&pci_read.busNum)<<16|(0x1F&pci_read.deviceNum)<<11|(0x07&pciRead.funcNum)<<8|(pciRead.registerOffset)<<2);
+   
+}
+
 int32_t inb_32(uint32_t port)
 {
     uint32_t val;
@@ -23,7 +29,7 @@ void init_pci(){
         for(int j=0;j<32;j++)
         {
             struct pci_read pciRead={0,0x0C,0,j,i,0,1};
-            outb_32((uint32_t)pciRead,0xCF8);
+            outb_32((uint32_t)calculateConfigAddressSpace(pciRead),0xCF8);
             kprintf("%d",inb_32(0xCFC));
             
         }
