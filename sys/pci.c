@@ -27,7 +27,7 @@ bool deviceHasFunctions(uint8_t device,uint8_t bus)
     
     kprintf("\n%d\n",inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)));
     
-    return (inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)) & (1<<7);
+    return (inb_32(0xCFC)>>(8*(pciRead.registerOffset%4))) & (1<<7);
 }
 
 void init_pci(){
