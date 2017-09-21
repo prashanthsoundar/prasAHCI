@@ -14,8 +14,8 @@ struct pci_read
     uint8_t enableBit:1;
 }__attribute__((packed));
 
-int32_t inb(uint16_t port);
-void outb(uint32_t data,uint16_t port);
+int32_t inb_32(uint16_t port);
+void outb_32(uint32_t data,uint16_t port);
 
 void init_pci();
 
