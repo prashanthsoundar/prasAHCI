@@ -23,7 +23,7 @@ void init_pci(){
         for(int j=0;j<32;j++)
         {
             struct pci_read pciRead={0,0x0C,0,j,i,0,1};
-            outb_32(&pciRead,0xCF8);
+            outb_32((uint32_t)pciRead,0xCF8);
             kprintf("%d",inb_32(0xCFC));
             
         }
