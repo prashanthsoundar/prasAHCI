@@ -3,7 +3,7 @@
 
 uint32_t calculateConfigAddressSpace(struct pci_read pciRead)
 {
-    return (uint32_t)(1<<31|(0xFF&pci_read.busNum)<<16|(0x1F&pci_read.deviceNum)<<11|(0x07&pciRead.funcNum)<<8|(pciRead.registerOffset)<<2);
+    return (uint32_t)(1<<31|(0xFF&pciRead.busNum)<<16|(0x1F&pciRead.deviceNum)<<11|(0x07&pciRead.funcNum)<<8|(pciRead.registerOffset)<<2);
    
 }
 
