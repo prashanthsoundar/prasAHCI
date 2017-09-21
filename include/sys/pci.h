@@ -5,11 +5,11 @@
 struct pci_read
 {
     uint8_t zeroB:2;
-    unint8_t registerOffset:6;
-    unint8_t funcNum:3;
-    unint8_t deviceNum:5;
-    unint8_t busNum:8;
-    unint8_t served:8;
+    uint8_t registerOffset:6;
+    uint8_t funcNum:3;
+    uint8_t deviceNum:5;
+    uint8_t busNum:8;
+    uint8_t served:8;
     uint8_t enableBit:1;
 };
 
