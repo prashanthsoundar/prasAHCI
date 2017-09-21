@@ -38,7 +38,8 @@ void init_pci(){
     {
         for(int j=0;j<32;j++)
         {
-            //kprintf("\n%d\n",deviceHasFunctions(j,i));
+            kprintf("\n%d\n",deviceHasFunctions(j,i));
+            break;
             //kprintf("\n%d\n",inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)));
             
         }
