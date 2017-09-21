@@ -3,7 +3,7 @@
 
 uint32_t calConfigAddressSpace(struct pci_read pciRead)
 {
-    return (uint32_t)(1<<31|(0xFF&pciRead.busNum)<<16|(0x1F&pciRead.deviceNum)<<11|(0x07&pciRead.funcNum)<<8|(pciRead.registerOffset)<<2);
+    return (uint32_t)(1<<31|(0xFF&pciRead.busNum)<<16|(0x1F&pciRead.deviceNum)<<11|(0x07&pciRead.funcNum)<<8|(pciRead.registerOffset)&0xFC);
    
 }
 
@@ -38,7 +38,7 @@ void init_pci(){
     {
         for(int j=0;j<32;j++)
         {
-            kprintf("\n%d\n",deviceHasFunctions(j,i));
+            //kprintf("\n%d\n",deviceHasFunctions(j,i));
             //kprintf("\n%d\n",inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)));
             
         }
