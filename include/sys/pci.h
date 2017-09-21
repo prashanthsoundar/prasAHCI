@@ -1,6 +1,7 @@
 #ifndef _PCI_H
 #defing _PCI_H
 #include<sys/defs.h>
+#include<sys/kprintf.h>
 
 struct pci_read
 {
