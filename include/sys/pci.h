@@ -12,7 +12,7 @@ struct pci_read
     uint8_t busNum:8;
     uint8_t served:8;
     uint8_t enableBit:1;
-}__atribute__((packed));
+}__attribute__((packed));
 
 void init_pci();
 
