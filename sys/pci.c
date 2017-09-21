@@ -10,14 +10,14 @@ uint32_t calConfigAddressSpace(struct pci_read pciRead)
 int32_t inb_32(uint32_t port)
 {
     uint32_t val;
-    __asm__ __volatile__("inl %1,%0;":"=a" (val): "Nd" (port));
+    __asm__ __volatile__("inw %1,%0;":"=a" (val): "Nd" (port));
     return val;
 }
 
 
 void outb_32(uint32_t data,uint32_t port)
 {
-    __asm__ __volatile__("outl %0,%1;": :"a" (data),"Nd" (port));
+    __asm__ __volatile__("outw %0,%1;": :"a" (data),"Nd" (port));
 }
 
 void init_pci(){
