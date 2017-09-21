@@ -20,6 +20,16 @@ void outb_32(uint32_t data,uint16_t port)
     __asm__ __volatile__("outl %0,%1;": :"a" (data),"Nd" (port));
 }
 
+bool deviceHasFunctions(uint8_t device,uint8_t bus)
+{
+    struct pci_read pciRead={0,0x0E,0,device,bus,0,1};
+    outb_32(calConfigAddressSpace(pciRead),0xCF8);
+    
+    kprintf("\n%d\n",inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)));
+    
+    return (inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)) & (1<<7);
+}
+
 void init_pci(){
     
     
@@ -28,9 +38,8 @@ void init_pci(){
     {
         for(int j=0;j<32;j++)
         {
-            struct pci_read pciRead={0,0x0C,0,j,i,0,1};
-            outb_32((uint32_t)calConfigAddressSpace(pciRead),0xCF8);
-            kprintf("\n%d\n",inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)));
+            kprintf("%d",deviceHasFunctions(j,i));
+            //kprintf("\n%d\n",inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)));
             
         }
         
