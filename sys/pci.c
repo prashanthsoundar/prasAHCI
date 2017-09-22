@@ -85,25 +85,14 @@ void printALLDrivers()
                 uint32_t vendorID = readPIC(bus,device,function,0x00);
                 
                 if((vendorID&0xFFFF)==0xFFFF) break;
+                kprintf("Bus %d Device %d Function %d \n",bus,device,function);
                 decToHexa((readPIC(bus,device,function,0x00)&0xFF00)>>8);
                 decToHexa((readPIC(bus,device,function,0x00)&0xFF));
                 kprintf("\t");
                 decToHexa((readPIC(bus,device,function,0x02)&0xFF00)>>8);
                 decToHexa((readPIC(bus,device,function,0x02)&0xFF));
                 kprintf("\n");
-              //  decToHexa(readPIC(bus,device,function,0x00));
-                   // decToHexa((readPIC(bus,device,function,0x00)&&0xFF)>>8);
-                   // decToHexa(readPIC(bus,device,function,0x00)&&0xFF);
-//                    decToHexa((readPIC(bus,device,function,0x02)&&0xFFFF)>>8);
-//                    decToHexa(readPIC(bus,device,function,0x02)&&0xFF);
-//                    kprintf("\n");
-//                    kprintf("Class ID: %x\n",readPIC(bus,device,function,0x0B));
-//                    kprintf("Subclass ID: %x\n",readPIC(bus,device,function,0x0A));
-//                    kprintf("Interface ID: %x\n",readPIC(bus,device,function,0x09));
-//                    kprintf("Revision: %x\n",readPIC(bus,device,function,0x08));
-//                    kprintf("Interrupt: %x\n",readPIC(bus,device,function,0x3C));
-//                    kprintf("Vendor ID: %x\n",readPIC(bus,device,function,0x00));
-//                    kprintf("Vendor ID: %x\n",readPIC(bus,device,function,0x00));
+                kprintf("________________________\n");
                 }
             }
         }
