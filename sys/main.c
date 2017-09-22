@@ -27,8 +27,7 @@ void start(uint32_t *modulep, void *physbase, void *physfree)
   }
   kprintf("physfree %p\n", (uint64_t)physfree);
   kprintf("tarfs in [%p:%p]\n", &_binary_tarfs_start, &_binary_tarfs_end);
-
-    while(1);
+  while(1);
 }
 
 void boot(void)
@@ -50,13 +49,17 @@ void boot(void)
   init_pit();
   init_rtc();
     
- keypress_bar("LAST PRESSED: ",0XF0);
- boot_time_bar(0,0,0,0XF0);
-    time_bar(0,0,0,0XF0);
+ keypress_bar("LAST PRESSED: ",14);
+ boot_time_bar(0,0,0,14);
+    time_bar(0,0,0,14);
 
   
    // __asm__ __volatile__ ("int $0x20":::);
-  
+  for(
+    temp1 = "!!!!! start() returned !!!!!", temp2 = (char*)0xb8000;
+    *temp1;
+    temp1 += 1, temp2 += 2
+  ) *temp2 = *temp1;
   start(
     (uint32_t*)((char*)(uint64_t)loader_stack[3] + (uint64_t)&kernmem - (uint64_t)&physbase),
     (uint64_t*)&physbase,
@@ -67,6 +70,5 @@ void boot(void)
     *temp1;
     temp1 += 1, temp2 += 2
   ) *temp2 = *temp1;
-    
   while(1) __asm__ volatile ("hlt");
 }
