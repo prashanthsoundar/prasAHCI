@@ -41,7 +41,7 @@ void printALLDrivers()
         for(device=0;device<32:device++)
         {
             int multiFunction = ifMultiFunction(bus,device)>0?8:1;
-            for(int function =0;function<multifunction:function++)
+            for(int function =0;function<multifunction;function++)
             {
                 uint32_t vendorID = readPIC(bus,device,function,0x00);
                 
