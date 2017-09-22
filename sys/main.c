@@ -51,7 +51,7 @@ void boot(void)
   init_pic();
   init_pit();
   init_rtc();
-    init_pci();
+    printALLDrivers();
     
  keypress_bar("LAST PRESSED: ",0XF0);
  boot_time_bar(0,0,0,0XF0);
