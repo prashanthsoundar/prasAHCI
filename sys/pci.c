@@ -88,6 +88,7 @@ void printALLDrivers()
                    // decToHexa(readPIC(bus,device,function,0x00)&&0xFF);
                     decToHexa((readPIC(bus,device,function,0x02)&&0xFF00)>>8);
                     decToHexa(readPIC(bus,device,function,0x02)&&0xFF);
+                kprintf("\n");
 //                    kprintf("Class ID: %x\n",readPIC(bus,device,function,0x0B));
 //                    kprintf("Subclass ID: %x\n",readPIC(bus,device,function,0x0A));
 //                    kprintf("Interface ID: %x\n",readPIC(bus,device,function,0x09));
