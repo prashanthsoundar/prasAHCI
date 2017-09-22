@@ -30,6 +30,41 @@ int ifMultiFunction(uint16_t bus,uint16_t device)
     return readPIC(bus,device,0,0x0E) & (1<<7);
 }
 
+void decToHexa(int n)
+{
+    // char array to store hexadecimal number
+    char hexaDeciNum[100];
+    
+    // counter for hexadecimal number array
+    int i = 0;
+    while(n!=0)
+    {
+        // temporary variable to store remainder
+        int temp  = 0;
+        
+        // storing remainder in temp variable.
+        temp = n % 16;
+        
+        // check if temp < 10
+        if(temp < 10)
+        {
+            hexaDeciNum[i] = temp + 48;
+            i++;
+        }
+        else
+        {
+            hexaDeciNum[i] = temp + 55;
+            i++;
+        }
+        
+        n = n/16;
+    }
+    
+    // printing hexadecimal number array in reverse order
+    for(int j=i-1; j>=0; j--)
+        kprintf("%c",hexaDeciNum[j]);
+}
+
 void writePIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset,uint32_t value)
 {
     uint32_t command = (uint32_t)((0x01<<31)|(bus&0xFF)<<16|(device&0x1F)<<11|(function&0x07)<<8|(offset&0xFC));
