@@ -20,8 +20,8 @@ void outb_32(uint32_t data,uint16_t port)
 uint32_t readPIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset)
 {
     uint32_t command = (uint32_t)((0x01<<31)|(bus&0xFF)<<16|(device&0x1F)<<11|(function&0x07)<<8|(offset&0xFC));
-    outb_32(command,PCIcommandPort);
-    uint32_t result = inb_32(PCIdataPort);
+    outb_32(command,commandPort);
+    uint32_t result = inb_32(dataPort);
     return result >> (8*(offset%4));
 }
 
@@ -33,8 +33,8 @@ int ifMultiFunction(uint16_t bus,uint16_t device)
 void writePIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset,uint32_t value)
 {
     uint32_t command = (uint32_t)((0x01<<31)|(bus&0xFF)<<16|(device&0x1F)<<11|(function&0x07)<<8|(offset&0xFC));
-    outb_32(command,PCIcommandPort);
-    outb_32(value,PCIdataPort);
+    outb_32(command,commandPort);
+    outb_32(value,dataPort);
 }
 
 void printALLDrivers()
