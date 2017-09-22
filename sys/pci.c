@@ -1,12 +1,6 @@
 #include<sys/pci.h>
 #include<sys/defs.h>
 
-uint32_t calConfigAddressSpace(struct pci_read pciRead)
-{
-    return (uint32_t)(1<<31|(0xFF&pciRead.busNum)<<16|(0x1F&pciRead.deviceNum)<<11|(0x07&pciRead.funcNum)<<8|pciRead.registerOffset<<2);
-   
-}
-
 int32_t inb_32(uint16_t port)
 {
     uint32_t val;
@@ -20,31 +14,52 @@ void outb_32(uint32_t data,uint16_t port)
     __asm__ __volatile__("outl %0,%1;": :"a" (data),"Nd" (port));
 }
 
-int deviceHasFunctions(uint8_t device,uint8_t bus)
+uint32_t readPIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset)
 {
-    struct pci_read pciRead={0,0x00,0,device,bus,0,1};
-    outb_32(calConfigAddressSpace(pciRead),0xCF8);
-    
-    kprintf("\n%d\n",(uint16_t)((inb_32 (0xCFC) >> ((pciRead.registerOffset & 2) * 8)) & 0xffff));
-    
-    return (inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)));// & (1<<7);
+    uint32_t command = (uint32_t)((0x01<<31)|(bus&0xFF)<<16|(device&0x1F)<<11|(function&0x07)<<8|(offset&0xFC));
+    outb_32(command,commandPort);
+    uint32_t result = inb_32(dataPort);
+    return result >> (8*(offset%4));
 }
 
-void init_pci(){
-    
-    
-    
-    for(int i=0;i<8;i++)
+int ifMultiFunction(uint16_t bus,uint16_t device)
+{
+    return readPIC(bus,device,0,0x0E) & (1<<7)
+}
+
+void writePIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset,uint32_t value)
+{
+    uint32_t command = (uint32_t)((0x01<<31)|(bus&0xFF)<<16|(device&0x1F)<<11|(function&0x07)<<8|(offset&0xFC));
+    outb_32(command,commandPort);
+    outb_32(value,dataPort);
+}
+
+void printALLDrivers()
+{
+    for (int bus=0;bus<8;bus++)
     {
-        for(int j=0;j<32;j++)
+        for(device=0;device<32:device++)
         {
-            kprintf("\n%d\n",deviceHasFunctions(j,i));
-            break;
-            //kprintf("\n%d\n",inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)));
-            
+            int multiFunction = ifMultiFunction(bus,device)>0?8:1;
+            for(int function =0;function<multifunction:function++)
+            {
+                uint32_t vendorID = readPIC(bus,device,function,0x00);
+                
+                if(vendorID==0xFFFF||vendorID==0x0000) break;
+                    kprintf("Vendor ID: %x",(readPIC(bus,device,function,0x00)&&0xFF)>>8);
+                    kprintf("%x ",readPIC(bus,device,function,0x02)&&0xFF);
+                    kprintf("Device ID: %x",(readPIC(bus,device,function,0x02)&&0xFF)>>8);
+                    kprintf("%x ",readPIC(bus,device,function,0x02)&&0xFF);
+//                    kprintf("Class ID: %x\n",readPIC(bus,device,function,0x0B));
+//                    kprintf("Subclass ID: %x\n",readPIC(bus,device,function,0x0A));
+//                    kprintf("Interface ID: %x\n",readPIC(bus,device,function,0x09));
+//                    kprintf("Revision: %x\n",readPIC(bus,device,function,0x08));
+//                    kprintf("Interrupt: %x\n",readPIC(bus,device,function,0x3C));
+//                    kprintf("Vendor ID: %x\n",readPIC(bus,device,function,0x00));
+//                    kprintf("Vendor ID: %x\n",readPIC(bus,device,function,0x00));
+                }
+            }
         }
-        break;
         
     }
-    
 }

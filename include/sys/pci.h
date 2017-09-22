@@ -3,20 +3,12 @@
 #include<sys/defs.h>
 #include<sys/kprintf.h>
 
-struct pci_read
-{
-    uint8_t zeroB:2;
-    uint8_t registerOffset:6;
-    uint8_t funcNum:3;
-    uint8_t deviceNum:5;
-    uint8_t busNum:8;
-    uint8_t reserved:7;
-    uint8_t enableBit:1;
-}__attribute__((packed));
+uint16_t dataPort = 0xCFC;
+uint16_t commandPort = 0xCF8;
 
-int32_t inb_32(uint16_t port);
-void outb_32(uint32_t data,uint16_t port);
-
-void init_pci();
+uint32_t readPIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset);
+void writePIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset,uint32_t value);
+int ifMultiFunction(uint16_t bus,uint16_t device);
+void printALLDrivers();
 
 #endif
