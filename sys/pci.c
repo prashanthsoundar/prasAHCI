@@ -51,9 +51,8 @@ void printALLDrivers()
                 
                 if((vendorID&0xFFFF)==0xFFFF) break;
                 kprintf("Bus %d Device %d Function %d \n",bus,device,function);
-                kprintf("%x \n",(readPIC(bus,device,function,0x00)));
-                kprintf("%x \n",(readPIC(bus,device,function,0x08)));
-                kprintf("________________________\n");
+                kprintf("%x\n",(readPIC(bus,device,function,0x00)));
+                kprintf("%x\n",(readPIC(bus,device,function,0x08)));
                 }
             }
         }
