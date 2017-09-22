@@ -23,7 +23,7 @@ uint32_t readPIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset)
     outb_32(command,commandPort);
     uint32_t result = inb_32(dataPort);
     return result >> (8*(offset%4));
-    return result;
+   // return result;
 }
 
 int ifMultiFunction(uint16_t bus,uint16_t device)
