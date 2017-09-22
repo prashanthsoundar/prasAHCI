@@ -92,7 +92,7 @@ void printALLDrivers()
                 decToHexa((readPIC(bus,device,function,0x02)&0xFF00)>>8);
                 decToHexa((readPIC(bus,device,function,0x02)&0xFF));
                 kprintf("\t");
-                decToHexa((readPIC(bus,device,function,0x08)&0xFF));
+                decToHexa((readPIC(bus,device,function,0x08)&0xFF00)>>8);
                 kprintf("\t");
                 decToHexa((readPIC(bus,device,function,0x09)&0xFF));
                 kprintf("\n");
