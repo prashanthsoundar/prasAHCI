@@ -85,7 +85,7 @@ void printALLDrivers()
                 uint32_t vendorID = readPIC(bus,device,function,0x00);
                 
                 if(vendorID==0xFFFF) break;
-                kprintf("%x ",(readPIC(bus,device,function,0x00)&0xFF0000)>>16);
+                kprintf("%x ",(readPIC(bus,device,function,0x00)&0xFFFF));
                 decToHexa(readPIC(bus,device,function,0x00));
                    // decToHexa((readPIC(bus,device,function,0x00)&&0xFF)>>8);
                    // decToHexa(readPIC(bus,device,function,0x00)&&0xFF);
