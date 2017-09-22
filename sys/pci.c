@@ -1,6 +1,9 @@
 #include<sys/pci.h>
 #include<sys/defs.h>
 
+uint16_t dataPort = 0xCFC;
+uint16_t commandPort = 0xCF8;
+
 int32_t inb_32(uint16_t port)
 {
     uint32_t val;
