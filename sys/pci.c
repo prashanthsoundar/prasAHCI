@@ -38,7 +38,7 @@ void printALLDrivers()
 {
     for (int bus=0;bus<8;bus++)
     {
-        for(device=0;device<32:device++)
+        for(device=0;device<32;device++)
         {
             int multiFunction = ifMultiFunction(bus,device)>0?8:1;
             for(int function =0;function<multifunction;function++)
