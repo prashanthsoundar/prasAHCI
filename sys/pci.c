@@ -24,7 +24,7 @@ uint32_t readPIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset)
 
 int ifMultiFunction(uint16_t bus,uint16_t device)
 {
-    return readPIC(bus,device,0,0x0E) & (1<<7)
+    return readPIC(bus,device,0,0x0E) & (1<<7);
 }
 
 void writePIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset,uint32_t value)
