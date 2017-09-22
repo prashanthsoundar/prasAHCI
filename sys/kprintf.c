@@ -21,6 +21,11 @@ void check_if_line_full(char **vm_adr,char **next_line_adr){
         }
         else{
             *next_line_adr = *next_line_adr+160;
+            /*while(*next_line_adr < *next_line_adr+160){
+             **next_line_adr = 0x20;
+             *next_line_adr=*next_line_adr+2;
+             }*/
+            
         }
     }
 }
@@ -159,13 +164,13 @@ void kprintf(const char *fmt, ...)
     char *next_line_adr = next_line_adrs;
     char **next_line_ptr = &next_line_adr;
     char **present_line_ptr = &vm_adr;
-    //for(char * temp2 = (char*)0xb8001; temp2 < (char*)0xb8000+160*25; temp2 += 2) *temp2 = 6; /* white */;
+    for(char * temp2 = (char*)0xb8001; temp2 < (char*)0xb8000+160*24; temp2 += 2) *temp2 = 7; /* white */;
     va_list valist;
     va_start(valist, fmt);
     while(*fmt != '\0'){
         if(*fmt == '\n'){
             while(vm_adr != next_line_adr){
-                //*vm_adr = 0x20;
+                *vm_adr = 0x20;
                 vm_adr+=2;
             }
             check_if_line_full(present_line_ptr,next_line_ptr);
@@ -233,7 +238,7 @@ void kprintf(const char *fmt, ...)
                 char c = va_arg(valist,int);
                 if(c == '\n'){
                     while(vm_adr != next_line_adr){
-                        //*vm_adr = 0x20;
+                        *vm_adr = 0x20;
                         vm_adr+=2;
                     }
                     check_if_line_full(present_line_ptr,next_line_ptr);
@@ -257,7 +262,7 @@ void kprintf(const char *fmt, ...)
                 while(*c != '\0'){
                     if(*c == '\n'){
                         while(vm_adr != next_line_adr){
-                            //*vm_adr = 0x20;
+                            *vm_adr = 0x20;
                             vm_adr+=2;
                         }
                         check_if_line_full(present_line_ptr,next_line_ptr);
