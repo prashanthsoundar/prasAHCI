@@ -22,8 +22,8 @@ uint32_t readPIC(uint16_t bus,uint16_t device,uint16_t function,uint32_t offset)
     uint32_t command = (uint32_t)((0x01<<31)|(bus&0xFF)<<16|(device&0x1F)<<11|(function&0x07)<<8|(offset&0xFC));
     outb_32(command,commandPort);
     uint32_t result = inb_32(dataPort);
-   // return result >> (8*(offset%4));
-    return result;
+    return result >> (8*(offset%4));
+   // return result;
 }
 
 int ifMultiFunction(uint16_t bus,uint16_t device)
@@ -86,14 +86,15 @@ void printALLDrivers()
                 
                 if((vendorID&0xFFFF)==0xFFFF) break;
                 kprintf("Bus %d Device %d Function %d \n",bus,device,function);
-                decToHexa((readPIC(bus,device,function,0x00)&0xFFFF0000)>>16);
-                //decToHexa((readPIC(bus,device,function,0x00)&0xFF));
+                decToHexa((readPIC(bus,device,function,0x00)&0xFF00)>>8);
+                decToHexa((readPIC(bus,device,function,0x00)&0xFF));
                 kprintf("\t");
                 decToHexa((readPIC(bus,device,function,0x02)&0xFF00)>>8);
                 decToHexa((readPIC(bus,device,function,0x02)&0xFF));
                 kprintf("\t");
-                decToHexa((readPIC(bus,device,function,0x08)&0xFF00)>>8);
                 decToHexa((readPIC(bus,device,function,0x08)&0xFF));
+                kprintf("\t");
+                decToHexa((readPIC(bus,device,function,0x09)&0xFF));
                 kprintf("\n");
                 kprintf("________________________\n");
                 }
