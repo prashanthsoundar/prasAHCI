@@ -87,6 +87,9 @@ void printALLDrivers()
                 if((vendorID&0xFFFF)==0xFFFF) break;
                 decToHexa((readPIC(bus,device,function,0x00)&0xFF00)>>8);
                 decToHexa((readPIC(bus,device,function,0x00)&0xFF));
+                kprintf("\t");
+                decToHexa((readPIC(bus,device,function,0x02)&0xFF00)>>8);
+                decToHexa((readPIC(bus,device,function,0x02)&0xFF));
                 kprintf("\n");
               //  decToHexa(readPIC(bus,device,function,0x00));
                    // decToHexa((readPIC(bus,device,function,0x00)&&0xFF)>>8);
