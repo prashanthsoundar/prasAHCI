@@ -25,7 +25,7 @@ int deviceHasFunctions(uint8_t device,uint8_t bus)
     struct pci_read pciRead={0,0x00,0,device,bus,0,1};
     outb_32(calConfigAddressSpace(pciRead),0xCF8);
     
-    kprintf("\n%d\n",(uint16_t)((inb_32 (0xCFC) >> ((pci_read.registerOffset & 2) * 8)) & 0xffff));
+    kprintf("\n%d\n",(uint16_t)((inb_32 (0xCFC) >> ((pciRead.registerOffset & 2) * 8)) & 0xffff));
     
     return (inb_32(0xCFC)>>(8*(pciRead.registerOffset%4)));// & (1<<7);
 }
