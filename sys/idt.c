@@ -120,7 +120,6 @@ void _key_press_handler(){
                 keypress_bar("LAST PRESSED: F11",14);break;
             case 88:
                 keypress_bar("LAST PRESSED: F12",14);break;
-                
             default:
                 if (shift)
                 {
@@ -133,7 +132,6 @@ void _key_press_handler(){
                     //control=0;
                     char s[] = {'L','A','S','T',' ','P','R','E','S','S','E','D',':',' ','^',CAPS_kbdus[a],'\0'};
                     keypress_bar(s,14);
-                    
                 }
                 else
                 {
@@ -212,24 +210,24 @@ void _rtc_intr_hndlr(){
     outb(0x04,0x70);
     rtc_hour = inb(0x71);
     
+    
     unsigned char regb;
     
     outb(0x0B,0x70);
     regb = inb(0x71);
         
-    //kprintf("\n%d:%d:%d\n",rtc_hour,rtc_minute,rtc_second);
+  //  kprintf("\n%d:%d:%d\n",rtc_hour,rtc_minute,rtc_second);
         
     if (!(regb & 0x04)) {
         //rtc_second=(rtc_second & 0x0F)+((rtc_second/16)*10);
         rtc_minute=(rtc_minute & 0x0F)+ ((rtc_minute/16)*10);
         rtc_hour=((rtc_hour & 0x0F) +(((rtc_hour & 0x70)/16)*10));
     }
-    
     if (!(regb & 0x02) && (rtc_hour & 0x80)) {
             rtc_hour = ((rtc_hour & 0x7F) + 12) % 24;
     }
         
-    //kprintf("\n%d:%d:%d\n",rtc_hour,rtc_minute,rtc_second);
+   // kprintf("\n%d:%d:%d\n",rtc_hour,rtc_minute,rtc_second);
     //NYC Time   
     rtc_hour=rtc_hour-4<0?rtc_hour-4+24:rtc_hour-4;
     

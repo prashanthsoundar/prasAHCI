@@ -1,5 +1,6 @@
 #include <sys/defs.h>
 #include <sys/gdt.h>
+#include <sys/kprintf.h>
 
 /* adapted from Chris Stones, shovelos */
 
@@ -79,6 +80,8 @@ void init_gdt() {
   sd->sd_hilimit = 0;
   sd->sd_gran = 0;
   sd->sd_hibase = ((uint64_t)&tss) >> 24;
+    
+//    kprintf("Size of segment descriptor  %d", sizeof(struct sys_segment_descriptor));
 
   _x86_64_asm_lgdt(&gdtr, 8, 16);
   _x86_64_asm_ltr(0x28);

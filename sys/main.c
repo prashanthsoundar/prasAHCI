@@ -7,6 +7,8 @@
 #include <sys/pit.h>
 #include <sys/pic.h>
 #include <sys/rtc.h>
+#include <sys/pci.h>
+
 
 #define INITIAL_STACK_SIZE 4096
 uint8_t initial_stack[INITIAL_STACK_SIZE]__attribute__((aligned(16)));
@@ -48,6 +50,7 @@ void boot(void)
   init_pic();
   init_pit();
   init_rtc();
+    printALLDrivers();
     
  keypress_bar("LAST PRESSED: ",14);
  boot_time_bar(0,0,0,14);

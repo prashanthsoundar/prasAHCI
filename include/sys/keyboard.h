@@ -1,6 +1,9 @@
 #ifndef _KEYBOARD_H
 #define _KEYBOARD_H
 
+//source of keyboard layout
+//http://www.osdever.net/bkerndev/Docs/keyboard.htm
+
 char kbdus[128] =
 {
     0,  27, '1', '2', '3', '4', '5', '6', '7', '8',	/* 9 */
