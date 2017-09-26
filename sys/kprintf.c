@@ -20,20 +20,11 @@ void check_if_line_full(char **vm_adr,char **next_line_adr){
             *vm_adr = *next_line_adr-160;
         }
         else{
-<<<<<<< HEAD
           *next_line_adr = *next_line_adr+160;
             /*while(*next_line_adr < *next_line_adr+160){
               **next_line_adr = 0x20;
               *next_line_adr=*next_line_adr+2;
             }*/
-=======
-            *next_line_adr = *next_line_adr+160;
-            /*while(*next_line_adr < *next_line_adr+160){
-             **next_line_adr = 0x20;
-             *next_line_adr=*next_line_adr+2;
-             }*/
->>>>>>> 15b6e47cadd7579fb0b5af6b69b03a79a4ff5c55
-            
         }
     }
 }
