@@ -10,6 +10,7 @@ static volatile hba_mem_t *abar = (hba_mem_t *)AHCI_BASE;
 
 void printVals()
 {
+    kprintf("______________________________________\n");
     kprintf("__ %x __ %x \n",abar->cap,abar->pi);
 }
 
