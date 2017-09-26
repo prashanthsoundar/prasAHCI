@@ -216,7 +216,7 @@ int write(hba_port_t *port, uint32_t startl, uint32_t starth, uint32_t count, ui
 	int spin = 0; // Spin lock timeout counter
 	int slot = find_cmdslot(port);
 	if (slot == -1)
-    kprintf("")
+        kprintf("");
 		return 0;
  
 	hba_cmd_header_t *cmdheader = (hba_cmd_header_t*)port->clb;
