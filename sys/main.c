@@ -50,7 +50,7 @@ void boot(void)
   init_pic();
   init_pit();
   init_rtc();
-    printVals();
+  printVals();
     
     
  keypress_bar("LAST PRESSED: ",14);
