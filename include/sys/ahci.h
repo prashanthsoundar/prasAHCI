@@ -12,6 +12,10 @@
 #define HBA_PxCMD_CR   (1U << 15)
 #define HBA_PxIS_TFES  (1U << 30)
 
+#define AHCI_BASE 0x3F000000
+#define ATA_CMD_READ_DMA_EX 0x25
+#define ATA_CMD_WRITE_DMA_EX 0x35
+
 #define AHCI_DEV_SATA   0x00000101  // SATA drive
 #define AHCI_DEV_SATAPI 0xEB140101  // SATAPI drive
 #define AHCI_DEV_SEMB   0xC33C0101  // Enclosure management bridge
@@ -333,5 +337,7 @@ typedef volatile struct {
   // 0x100 - 0x10FF, Port control registers
   hba_port_t ports[MAX_PORT_CNT]; // 1 ~ 32
 }__attribute__((__packed__)) hba_mem_t;
+
+void port_probe(hba_mem_t *abar);
 
 #endif
