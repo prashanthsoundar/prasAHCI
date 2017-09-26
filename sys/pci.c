@@ -11,7 +11,7 @@ static volatile hba_mem_t *abar = (hba_mem_t *)AHCI_BASE;
 void printVals()
 {
     kprintf("______________________________________\n");
-    kprintf("__ %x __\n",abar->port[0]->clb);
+    kprintf("__ %x __\n",abar->ports[0]->clb);
 }
 
 int32_t inb_32(uint16_t port)
