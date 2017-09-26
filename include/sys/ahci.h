@@ -340,4 +340,6 @@ typedef volatile struct {
 
 void port_probe(hba_mem_t *abar);
 
+void printVals();
+
 #endif

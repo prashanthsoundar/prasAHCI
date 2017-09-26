@@ -50,16 +50,8 @@ void boot(void)
   init_pic();
   init_pit();
   init_rtc();
-    printALLDrivers();
-    int i=0;
-    while(i<5){
-      int j=0;
-      while(j<10000000){
-        j++;
-      }
-      i++;
-    }
-    probeAHCI();
+    printVals();
+    
     
  keypress_bar("LAST PRESSED: ",14);
  boot_time_bar(0,0,0,14);

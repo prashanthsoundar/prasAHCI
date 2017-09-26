@@ -7,6 +7,12 @@ uint16_t commandPort = 0xCF8;
 
 static volatile hba_mem_t *abar = (hba_mem_t *)AHCI_BASE;
 
+
+void printVals()
+{
+    kprintf("__ %x __ %x \n",abar->cap,abar->pi)
+}
+
 int32_t inb_32(uint16_t port)
 {
     uint32_t val;
