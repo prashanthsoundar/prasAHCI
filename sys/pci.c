@@ -74,14 +74,6 @@ void printALLDrivers()
                 kprintf("Vendor ID: %x\n",(vendorID));
                 kprintf("Class ID: %x\n",(class_ID));
                 //kprintf("%p\n",(header));
-                int i=0;
-                  while(i<5){
-                  int j=0;
-                    while(j<10000000){
-                      j++;
-                    }
-                    i++;
-                  }
                 if(((class_ID&0xFFFF0000)>>16)==0x0106){
                   uint64_t bar_5 = readPIC(bus,device,function,36);
                   readPIC2(bus,device,function,36,AHCI_BASE);
