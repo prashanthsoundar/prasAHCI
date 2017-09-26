@@ -317,7 +317,7 @@ void port_probe(hba_mem_t *abar){
         if(firstport == 0){
           port->cmd |= HBA_PxCMD_FRE;
 	        port->cmd |= HBA_PxCMD_ST;
-            uint16_t *buf2={123123123,1,2,3,4,5,6,7,0};
+            uint16_t *buf2=NULL;
           kprintf("Writing\n");
           write(port,0,0,1,buf2);
           kprintf("Reading\n");
