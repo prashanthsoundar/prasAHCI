@@ -50,6 +50,7 @@ void boot(void)
   init_pic();
   init_pit();
   init_rtc();
+    printALLDrivers();
   printVals();
     
     
